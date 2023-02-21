@@ -1,6 +1,6 @@
 # Project 1 - Machine Learning
 
-## Introduction
+## Data Introduction
 These data record the level of atmospheric ozone concentration from eight daily meteorological measurements made in the Los Angeles basin in 1976.  Although measurements were made every day that year, some observations were missing; here we have the 330 complete cases. The data were given to us by Leo Breiman; he was a consultant on a project from which these data are taken.  The response, referred to as ozone, is actually the log of the daily maximum of the hourly-average ozone concentrations in Upland, California.
 
 
@@ -17,6 +17,7 @@ These data record the level of atmospheric ozone concentration from eight daily 
 **doy** : Day of the Year <br />
 
 ## Need to do: 
-- [ ] first task
+- [ ] Description of the data
+  - [ ] andet
 - [ ] second task 
 - [ ] third task
