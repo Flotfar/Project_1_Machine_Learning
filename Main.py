@@ -12,4 +12,4 @@ df = pd.read_csv("LA_Ozone_Data.txt", header=None)
 # Converting the panda dataframe to a numpy array: 
 raw_data = df.values 
 classLabels = raw_data[0,:]
-print(classLabels)
+
