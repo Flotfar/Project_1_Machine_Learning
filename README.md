@@ -5,7 +5,7 @@ These data record the level of atmospheric ozone concentration from eight daily 
 
 Detailed variable names:
 
-** ozone ** : Upland Maximum Ozone
+**ozone** : Upland Maximum Ozone
 ** vh ** : Vandenberg 500 mb Height
 ** wind ** : Wind Speed (mph)
 ** humidity ** : Humidity (%)
