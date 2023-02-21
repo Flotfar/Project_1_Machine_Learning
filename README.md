@@ -17,7 +17,6 @@ These data record the level of atmospheric ozone concentration from eight daily 
 **doy** : Day of the Year <br />
 
 ## Need to do: 
-- [ ] Description of the data
-  - [ ] andet
-- [ ] second task 
-- [ ] third task
+- [ ] /(1) Load data
+- [ ] /(2) Convert data with suited models
+- [ ] /(3) Visualization of the data
