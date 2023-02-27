@@ -47,7 +47,7 @@ def box_plot(data_values, class_labels, units):
 
     plt.show()
 
-box_plot(data_values, class_labels,units)
+#box_plot(data_values, class_labels,units)
 
 # Boxplots - Are there any Outliers?
 
@@ -112,4 +112,4 @@ def correlation_heatmap(data_values, class_labels):
     sns.heatmap(correlation_mat, mask = mask, annot = True)
     plt.show()
 
-#correlation_heatmap(data_values, class_labels)
+correlation_heatmap(data_values, class_labels)
