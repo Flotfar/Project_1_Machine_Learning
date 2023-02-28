@@ -19,9 +19,9 @@ class_labels = raw_data[0,:]
 
 
 
-###################################
+###############################################
 # 3-Data visualization
-###################################
+###############################################
 
 # Boxplots - Are there any Outliers?
 
@@ -103,7 +103,6 @@ def normal_distribution(class_labels, data_values):
 
 
 
-
 def correlation_heatmap(data_values, class_labels):
     # checking correlation using heatmap
     data_frame = pd.DataFrame(data_values[:,:9], columns = class_labels[:9])
@@ -113,3 +112,25 @@ def correlation_heatmap(data_values, class_labels):
     plt.show()
 
 correlation_heatmap(data_values, class_labels)
+
+
+
+###############################################
+# 3-Data visualization
+###############################################
+
+# creating month 'moy' column into the array for later categorization
+doy = raw_data[1:, 9]
+days = [eval(i) for i in doy]
+days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+month = ["moy"]
+
+for day in days:
+    for i, days_in_this_month in enumerate(days_in_month):
+        if day <= days_in_this_month:
+            month.append(i+1)
+            break
+        else:
+            day -= days_in_this_month
+
+with_months = np.column_stack((raw_data, month))
