@@ -135,4 +135,10 @@ for day in days:
 
 with_months = np.column_stack((raw_data, month))
 
+# extracting non correlating attributes and related column:
+columns = [2, 5, 6, 8, 9]
+data = np.delete(with_months, np.s_[2, 5, 6, 8, 9], 1)
+
+
+
 
