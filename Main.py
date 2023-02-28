@@ -116,10 +116,10 @@ correlation_heatmap(data_values, class_labels)
 
 
 ###############################################
-# 3-Data visualization
+# PCA1 & PCA2 plotting 
 ###############################################
 
-# creating month 'moy' column into the array for later categorization
+# creating month 'moy' column into the array for categorization
 doy = raw_data[1:, 9]
 days = [eval(i) for i in doy]
 days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -134,3 +134,5 @@ for day in days:
             day -= days_in_this_month
 
 with_months = np.column_stack((raw_data, month))
+
+
