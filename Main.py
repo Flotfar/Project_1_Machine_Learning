@@ -19,9 +19,9 @@ class_labels = raw_data[0,:]
 
 
 
-###################################
+###############################################
 # 3-Data visualization
-###################################
+###############################################
 
 # Boxplots - Are there any Outliers?
 
@@ -103,7 +103,6 @@ def normal_distribution(class_labels, data_values):
 
 
 
-
 def correlation_heatmap(data_values, class_labels):
     # checking correlation using heatmap
     data_frame = pd.DataFrame(data_values[:,:9], columns = class_labels[:9])
@@ -112,6 +111,7 @@ def correlation_heatmap(data_values, class_labels):
     sns.heatmap(correlation_mat, mask = mask, annot = True)
     plt.show()
 
+<<<<<<< HEAD
 #correlation_heatmap(data_values, class_labels)
 
 
@@ -222,3 +222,36 @@ def pca_bar_chart(data_values, class_labels):
 
 pca_bar_chart(data_values, class_labels)
 """
+=======
+correlation_heatmap(data_values, class_labels)
+
+
+
+###############################################
+# PCA1 & PCA2 plotting 
+###############################################
+
+# creating month 'moy' column into the array for categorization
+doy = raw_data[1:, 9]
+days = [eval(i) for i in doy]
+days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+month = ["moy"]
+
+for day in days:
+    for i, days_in_this_month in enumerate(days_in_month):
+        if day <= days_in_this_month:
+            month.append(i+1)
+            break
+        else:
+            day -= days_in_this_month
+
+with_months = np.column_stack((raw_data, month))
+
+# extracting non correlating attributes and related column:
+columns = [2, 5, 6, 8, 9]
+data = np.delete(with_months, np.s_[2, 5, 6, 8, 9], 1)
+
+
+
+
+>>>>>>> df79cee47f7a6577ec4f5282ffddb84082409408
