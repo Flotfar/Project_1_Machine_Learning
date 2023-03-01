@@ -111,7 +111,6 @@ def correlation_heatmap(data_values, class_labels):
     sns.heatmap(correlation_mat, mask = mask, annot = True)
     plt.show()
 
-<<<<<<< HEAD
 #correlation_heatmap(data_values, class_labels)
 
 
@@ -222,7 +221,6 @@ def pca_bar_chart(data_values, class_labels):
 
 pca_bar_chart(data_values, class_labels)
 """
-=======
 correlation_heatmap(data_values, class_labels)
 
 
@@ -254,4 +252,3 @@ data = np.delete(with_months, np.s_[2, 5, 6, 8, 9], 1)
 
 
 
->>>>>>> df79cee47f7a6577ec4f5282ffddb84082409408
