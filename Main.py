@@ -5,12 +5,12 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from scipy.stats import norm
 import seaborn as sns
- 
+from scipy.linalg import svd
 
 # Loading file into str. array 
 # df = np.genfromtxt("LA_Ozone_Data.txt", dtype=int, skip_header=0, encoding=None, delimiter=",")
 # ClassLabels = (df[0,])
-df = pd.read_csv("LA_Ozone_Data.txt", header=None)
+df = pd.read_csv(r"C:\Users\jkdah\git\Project-1---Machine-Learning\LA_Ozone_Data.txt", header=None)
 
 # Converting the panda dataframe to a numpy array: 
 raw_data = df.values
@@ -112,4 +112,113 @@ def correlation_heatmap(data_values, class_labels):
     sns.heatmap(correlation_mat, mask = mask, annot = True)
     plt.show()
 
-correlation_heatmap(data_values, class_labels)
+#correlation_heatmap(data_values, class_labels)
+
+
+def pca_cummulative(data_values):
+
+    N = len(data_values[:,0])
+
+    columns_to_delete = [2, 5, 6, 8]
+    plot_titles = ['Variance explained by principal components (all attributes)',
+                   'Variance explained by principal components (selected attributes)']
+
+    pc_coefficients = [5,2]
+
+    #Removing doy from data_values
+    X_all = np.delete(data_values, -1, 1)
+    #Removing un-selected data from X_all
+    X_selected = np.delete(X_all, columns_to_delete, 1)
+
+    #For loop over the to datasets
+    for i, X in enumerate([X_all, X_selected]):
+        
+        #Normalizing the data
+        Y = (X - X.mean(axis=0)*np.ones((N,1))) / X.std(axis=0)*np.ones((N,1))
+
+        #Using exercise 2_1_3 to plot varience explained
+        # PCA by computing SVD of Y 
+        U,S,V = svd(Y,full_matrices=False)
+
+        # Compute variance explained by principal components
+        rho = (S*S) / (S*S).sum() 
+
+        #printing the pc_coefficients for all (5) and selected attributes (2)
+        print(V[:pc_coefficients[i]])
+
+        #Defining the threshold
+        threshold = 0.9
+
+        # Plot variance explained in two subplots, for selected and all data
+        plt.subplot(1, 2, i + 1)
+        plt.plot(range(1,len(rho)+1),rho,'x-')
+        plt.plot(range(1,len(rho)+1),np.cumsum(rho),'o-')
+        plt.plot([1,len(rho)],[threshold, threshold],'k--')
+        plt.title(plot_titles[i]);
+        plt.xlabel('Principal component');
+        plt.ylabel('Variance explained');
+        plt.legend(['Individual','Cumulative','Threshold'])
+        plt.grid()
+
+
+    #plotting
+    plt.show()
+
+pca_cummulative(data_values)
+
+
+"""
+def pca_bar_chart(data_values, class_labels):
+
+    N = len(data_values[:,0])
+
+    columns_to_delete = [2, 5, 6, 8]
+    plot_titles = ['PC coefficients (all attributes)',
+                   'PC coefficients (selected attributes)']
+
+    #Removing doy from data_values
+    X_all = np.delete(data_values, -1, 1)
+    label_all = np.delete(class_labels, -1, 0)
+    #Removing un-selected data from X_all
+    X_selected = np.delete(X_all, columns_to_delete, 1)
+    label_selected = np.delete(class_labels, columns_to_delete, 0)
+    pc_coefficients = [5,2]
+
+    
+
+    #For loop over the to datasets
+    for i, X in enumerate([X_all, X_selected]):
+        
+        #Normalizing the data
+        Y = (X - X.mean(axis=0)*np.ones((N,1))) / X.std(axis=0)*np.ones((N,1))
+
+        #Using exercise 2_1_3 to plot varience explained
+        # PCA by computing SVD of Y 
+        U,S,V = svd(Y,full_matrices=False)
+        V_current = V[:pc_coefficients[i]]
+        # Plot variance explained in two subplots, for selected and all data
+        plt.subplot(1, 2, i + 1)
+        
+        # create data
+        
+        # plot data in grouped manner of bar type
+        if i == 0:
+
+            x = np.arange(pc_coefficients[i])
+            width = 0.2
+
+            plt.bar(x-0.4, V_current[0], width, color='red')
+            plt.bar(x-0.2, V_current[1], width, color='cyan')
+            plt.bar(x, V_current[2], width, color='orange')
+            plt.bar(x+0.2, V_current[3], width, color='green')
+            plt.bar(x+0.4, V_current[4], width, color='magenta')
+            plt.xticks(x, label_all)
+            plt.xlabel("Attributes")
+            plt.ylabel("PC coefficients")
+            plt.legend(["PC1", "PC2","PC3","PC4","PC5"])
+
+    #plotting
+    plt.show()
+
+pca_bar_chart(data_values, class_labels)
+"""
