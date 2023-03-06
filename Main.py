@@ -17,7 +17,7 @@ class_labels = raw_data[0,:]
 
 units = ["log(g/m3)", "m", "mph", "%", "F", "m", "Pa/m", "F", "miles", "-"]
 
-# Categorizing the datapoints in raw_data with quantile placement
+# Categorizing the datapoints in raw_data with quarter-year placement
 doy = raw_data[1:, 9]
 days = [eval(i) for i in doy]
 days_in_month = [31+28+31, 30+31+30, 31+31+30, 31+30+31]
