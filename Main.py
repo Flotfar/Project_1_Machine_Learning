@@ -169,21 +169,21 @@ def pca_cummulative(input):
 
 
 ##### plotting the PCA aginst the 3 most influencial PC's ##########
-def pca_visualization(input):
+def pca_visualization(input, loadings, labels):
 
     fig1 = plt.figure(figsize=(10,8), facecolor='w')
     ax = fig1.add_subplot(projection='3d')
 
     for i in range(input.shape[0]):
-        x = V[0,:] @ input[i,1:].T
-        y = V[1,:] @ input[i,1:].T
-        z = V[2,:] @ input[i,1:].T
+        x = loadings[0,:] @ input[i,:].T
+        y = loadings[1,:] @ input[i,:].T
+        z = loadings[2,:] @ input[i,:].T
 
-        if month[i] == 1:
+        if labels[i] == 1:
             ax.scatter(x,y,z, marker='o', color='gold', s=20)
-        elif month[i] == 2:
+        elif labels[i] == 2:
             ax.scatter(x,y,z, marker='o', color='dodgerblue', s=20)
-        elif month[i] == 3:
+        elif labels[i] == 3:
             ax.scatter(x,y,z, marker='o', color='limegreen', s=20)
         else:
             ax.scatter(x,y,z, marker='o', color='darkorange', s=20)
@@ -208,6 +208,6 @@ outliers(data_values, class_labels)
 normal_distribution(data_values, class_labels)
 correlation_heatmap(data_values, class_labels)
 pca_cummulative(rho)
-pca_visualization(data_values)
+pca_visualization(Y, V, month)
 
 
